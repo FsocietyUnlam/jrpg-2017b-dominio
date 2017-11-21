@@ -106,7 +106,13 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
   public final int otorgarExp() {
         return this.getNivel() * MULTIPLICADOREXPNPC;
     }
-
+	/**
+	 * Devuelve estado falso, ya que un NPC nunca podría estar en GodMode.
+	 */
+	@Override
+	public final boolean getGodMode() {
+		return false;
+	}
 
   /**
      * Retorna un booleano.
@@ -148,9 +154,9 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
   @Override
   public final int atacar(final Peleable atacado) {
     if (this.getRandom().nextDouble() <= NUMEROPARAATACAR) {
-      return atacado.serAtacado((int) (this.getAtaque() * MULTIPLICADORFUERZA));
+      return atacado.serAtacado((int) (this.getAtaque() * MULTIPLICADORFUERZA));//,atacado.getGodMode()
     } else {
-      return atacado.serAtacado(this.getAtaque());
+      return atacado.serAtacado(this.getAtaque());//,atacado.getGodMode()
     }
     }
 
@@ -161,7 +167,7 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
      * @return Retorna 0 si el ataque no fue realizado con exito
      */
   @Override
-  public final int serAtacado(int danio) {
+  public final int serAtacado(int danio) {//, boolean godModeEnemigo
     if (this.getRandom().nextDouble() >= NUMEROPARASERATACADO) {
       danio -= this.getDefensa() / DIVISORDEDEFENSA;
       if (danio > 0) {
