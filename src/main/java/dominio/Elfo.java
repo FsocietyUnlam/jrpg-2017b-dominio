@@ -78,7 +78,7 @@ public class Elfo extends Personaje {
         boolean pudoAtacar = false;
     if (this.getEnergia() >= ENERGIAMINIMA) {
       this.reducirEnergia(ENERGIAMINIMA);
-      if (atacado.serAtacado(this.getFuerza() + this.getNivel() * MULTIPLICADORNIVEL) > 0) {//,atacado.getGodMode()
+      if (atacado.serAtacado(this.getFuerza() + this.getNivel() * MULTIPLICADORNIVEL) > 0) {
         pudoAtacar = true;
       }
     }
@@ -110,7 +110,7 @@ public class Elfo extends Personaje {
         boolean pudoAtacar = false;
     if (this.getEnergia() >= ENERGIAMINIMA) {
       this.reducirEnergia(ENERGIAMINIMA);
-      if (atacado.serAtacado((this.getMagia())) > 0) {//,atacado.getGodMode()
+      if (atacado.serAtacado((this.getMagia())) > 0) {
         pudoAtacar = true;
       }
     }

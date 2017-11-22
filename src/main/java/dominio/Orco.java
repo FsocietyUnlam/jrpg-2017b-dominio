@@ -79,7 +79,7 @@ public class Orco extends Personaje {
         boolean pudoAtacar = false;
     if (this.getEnergia() >= ENERGIAMINIMA) {
       this.reducirEnergia(ENERGIAMINIMA);
-      if (atacado.serAtacado(this.getDefensa() * MULTIPLICADORDEFENSA) > 0) {//,atacado.getGodMode()
+      if (atacado.serAtacado(this.getDefensa() * MULTIPLICADORDEFENSA) > 0) {
         pudoAtacar = true;
       }
     }
@@ -109,7 +109,7 @@ public class Orco extends Personaje {
         boolean pudoAtacar = false;
     if (this.getEnergia() >= ENERGIAMINIMA) {
       this.reducirEnergia(ENERGIAMINIMA);
-      int danioCausado = atacado.serAtacado(this.getFuerza());//,atacado.getGodMode()
+      int danioCausado = atacado.serAtacado(this.getFuerza());
       if (danioCausado > 0) {
         this.serCurado(danioCausado);
         pudoAtacar = true;

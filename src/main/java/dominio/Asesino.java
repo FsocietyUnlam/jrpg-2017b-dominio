@@ -89,7 +89,7 @@ public class Asesino extends Casta {
         boolean pudoAtacar = false;
     if (caster.getEnergia() >= ENERGIAMINIMA) {
       caster.reducirEnergia(ENERGIAMINIMA);
-      if (atacado.serAtacado((int) (caster.getAtaque() * caster.getCasta().getDañoCritico())) > 0) {//,atacado.getGodMode()
+      if (atacado.serAtacado((int) (caster.getAtaque() * caster.getCasta().getDañoCritico())) > 0) {
         pudoAtacar = true;
       }
     }

@@ -80,7 +80,7 @@ public class Guerrero extends Casta {
         boolean pudoAtacar = false;
     if (caster.getEnergia() >= ENERGIAMINIMA) {
       caster.reducirEnergia(ENERGIAMINIMA);
-      if (atacado.serAtacado(caster.getAtaque() * MULTIPLICADORFUERZA) > 0) {//,atacado.getGodMode()
+      if (atacado.serAtacado(caster.getAtaque() * MULTIPLICADORFUERZA) > 0) {
         pudoAtacar = true;
       }
     }
@@ -147,7 +147,7 @@ public class Guerrero extends Casta {
       if (atacado instanceof Personaje) {
         int defensaOriginal = ((Personaje) atacado).getDefensa();
         ((Personaje) atacado).reducirDefensa(((Personaje) atacado).getDefensa());
-        if (atacado.serAtacado(caster.getAtaque()) > 0) {//,atacado.getGodMode()
+        if (atacado.serAtacado(caster.getAtaque()) > 0) {
           ((Personaje) atacado).aumentarDefensa(defensaOriginal);
           pudoAtacar = true;
         }

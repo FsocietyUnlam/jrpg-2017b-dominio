@@ -124,13 +124,60 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	 */
 	private static final int POSYI = 0;
 	/**
-	 * Atributo para definir si está con el cheat Modo dios.
-	 */
-	private boolean godMode;
-	/**
 	 * Atributo para definir si está con el cheat Invulnerable.
 	 */
-	private boolean invulnerable;
+	private int invulnerable;
+	/**
+	 * Atributo para definir si está con el cheat dobleFuerza.
+	 */
+	private int dobleFuerza;
+	/**
+	 * Atributo para definir si está con el cheat mitadFuerza.
+	 */
+	private int mitadFuerza;
+	/**
+	 * Atributo para definir si está con el cheat invisible.
+	 */
+	private int invisible;
+	/**
+	 * Atributo para definir si puede atravesar paredes.
+	 */
+	private int ptosAsigFuerza;
+	private int ptosAsigDestreza;
+	public int getPtosAsigFuerza() {
+		return ptosAsigFuerza;
+	}
+
+	public void setPtosAsigFuerza(int ptosAsigFuerza) {
+		this.ptosAsigFuerza = ptosAsigFuerza;
+	}
+
+	public int getPtosAsigDestreza() {
+		return ptosAsigDestreza;
+	}
+
+	public void setPtosAsigDestreza(int ptosAsigDestreza) {
+		this.ptosAsigDestreza = ptosAsigDestreza;
+	}
+
+	public int getPtosAsigInteligencia() {
+		return ptosAsigInteligencia;
+	}
+
+	public void setPtosAsigInteligencia(int ptosAsigInteligencia) {
+		this.ptosAsigInteligencia = ptosAsigInteligencia;
+	}
+
+	private int ptosAsigInteligencia;
+	private int atravesarParedes;
+	public int getAtravesarParedes() {
+		return atravesarParedes;
+	}
+
+	public void setAtravesarParedes(int atravesarParedes) {
+		this.atravesarParedes = atravesarParedes;
+	}
+
 	/**
 	 * Ataque del personaje.
 	 */
@@ -244,8 +291,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 		this.casta = casta;
 		this.idPersonaje = id;
-		this.invulnerable = false;
-		this.godMode = false;
+		this.invulnerable = 0;
 		experiencia = EXPERIENCIAINICIAL;
 		inteligencia = INTELIGENCIANICIAL;
 		destreza = DESTREZAINICIAL;
@@ -305,8 +351,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 		this.salud = salud;
 		this.energia = energia;
-		this.invulnerable = false;
-		this.godMode = false;
+		this.invulnerable = 0;
 		this.destreza = destreza;
 		this.aumentarDefensa(destreza);
 		this.inteligencia = inteligencia;
@@ -321,6 +366,30 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 		this.ataque = this.calcularPuntosDeAtaque();
 		this.magia = this.calcularPuntosDeMagia();
+	}
+
+	public int getDobleFuerza() {
+		return dobleFuerza;
+	}
+
+	public void setDobleFuerza(int dobleFuerza) {
+		this.dobleFuerza = dobleFuerza;
+	}
+
+	public int getMitadFuerza() {
+		return mitadFuerza;
+	}
+
+	public void setMitadFuerza(int mitadFuerza) {
+		this.mitadFuerza = mitadFuerza;
+	}
+
+	public int getInvisible() {
+		return invisible;
+	}
+
+	public void setInvisible(int invisible) {
+		this.invisible = invisible;
 	}
 
 	/**
@@ -400,7 +469,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	/**
 	 * Devuelve si esta en el estado invulnerable.
 	 */
-	public final boolean getInvulnerable() {
+	public final int getInvulnerable() {
 		return this.invulnerable;
 	}
 	
@@ -408,24 +477,8 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	 * Setea el estado invulnerable.
 	 * @param godMode
 	 */
-	public final void setInvulnerable(boolean invulnerable) {
+	public final void setInvulnerable(int invulnerable) {
 		this.invulnerable = invulnerable;
-	}
-	
-	/**
-	 * Devuelve si esta en el estado godMode.
-	 */
-	@Override
-	public final boolean getGodMode() {
-		return godMode;
-	}
-	
-	/**
-	 * Setea el estado godMode.
-	 * @param godMode
-	 */
-	public final void setGodMode(boolean godMode) {
-		this.godMode = godMode;
 	}
 	
 	@Override
@@ -536,9 +589,9 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 			if (this.getRandom().nextDouble() <= this.casta.getProbabilidadGolpeCritico()
 					+ this.destreza / DIVISORDEDESTREZA) {
-				return atacado.serAtacado(this.golpe_critico());//,atacado.getGodMode()
+				return atacado.serAtacado(this.golpe_critico());
 			} else {
-				return atacado.serAtacado(this.ataque);//,atacado.getGodMode()
+				return atacado.serAtacado(this.ataque);
 			}
 		}
 		return 0;
@@ -568,7 +621,7 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 
 	/**
 	 * Metodo que retorna un boolean si el personaje puede atacar o no. Devuelve
-	 * true si la energia es mayor a la ENERGIAMINIMA o si está en GodMode, puede atacar, y falso si la
+	 * true si la energia es mayor a la ENERGIAMINIMA, puede atacar, y falso si la
 	 * primera es menor a la ENERGIAMINIMA. ENERGIAMINIMA atributo static de la
 	 * clase Personaje.
 	 * 
@@ -576,7 +629,6 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	 */
 
 	public final boolean puedeAtacar() {
-		//return this.godMode || energia > ENERGIAMINIMA;
 		return energia > ENERGIAMINIMA;
 	}
 
@@ -677,12 +729,9 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	 */
 
 	@Override
-	public final int serAtacado(int danio) {//, boolean godModeEnemigo)
+	public final int serAtacado(int danio) {
 
-		if (!this.invulnerable && this.getRandom().nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
-			//if (godModeEnemigo) {
-				//salud = 0;
-			//}else { 
+		if (this.invulnerable==0 && this.getRandom().nextDouble() >= this.getCasta().getProbabilidadEvitarDaño()) {
 				danio -= this.getDefensa();
 				if (danio > 0) {
 					if (salud <= danio) {
@@ -693,7 +742,6 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 					}
 					return danio;
 				}
-			//}
 			return 0;
 		}
 		return 0;
@@ -711,6 +759,9 @@ public abstract class Personaje extends MadreDeTodo implements Peleable, Seriali
 	 */
 
 	public final int serRobadoSalud(int danio) {
+		if (this.invulnerable == 1) {
+			return 0;
+		}
 		danio -= this.getDefensa();
 		if (danio <= 0) {
 			return 0;
