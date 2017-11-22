@@ -13,9 +13,9 @@ public interface Peleable {
      * y en NonPlayableCharacter.
      *
      * @param daño Valor el cual se descontará de la defensa.
+     * @param godModeEnemigo Valor booleano que determina si el enemigo esta en GodMode o no.
      * @return Retorna un entero con el daño causado al llamador.
      */
-    
     int serAtacado(int daño);
 
     

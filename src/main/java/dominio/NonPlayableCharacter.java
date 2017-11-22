@@ -107,7 +107,6 @@ public class NonPlayableCharacter extends MadreDeTodo implements Peleable {
         return this.getNivel() * MULTIPLICADOREXPNPC;
     }
 
-
   /**
      * Retorna un booleano.
      * Que indica si el NPC esta vivo, evaluando si el mismo tiene
